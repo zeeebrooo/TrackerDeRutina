@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101318">
+  <title>Rutinas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">ENTRENAMIENTO</span>
+        <h1>Rutinas</h1>
+      </div>
+      <button class="icon-button" id="openBuilder" aria-label="Crear rutina">＋</button>
+    </header>
+
+    <section class="routine-picker">
+      <label for="routineSelect">Rutina</label>
+      <select id="routineSelect"></select>
+      <p id="routineDescription" class="muted"></p>
+    </section>
+
+    <section id="home" class="panel">
+      <div class="home-copy">
+        <span id="homeStepCount" class="muted"></span>
+        <h2 id="homeTitle"></h2>
+        <p id="homeSummary" class="muted"></p>
+      </div>
+      <button class="primary" id="startWorkout">Empezar</button>
+    </section>
+
+    <section id="workout" class="panel workout hidden">
+      <div class="progress">
+        <span id="stepLabel"></span>
+        <div><i id="progressBar"></i></div>
+      </div>
+
+      <span id="stepType" class="tag"></span>
+      <h2 id="exerciseName"></h2>
+      <p id="exerciseNote" class="muted note"></p>
+
+      <div id="repsView" class="measure">
+        <strong id="repsValue">0</strong>
+        <span>repeticiones</span>
+        <div class="round-controls">
+          <button id="minusRep">−</button>
+          <button id="plusRep">+</button>
+        </div>
+        <button class="primary" id="finishReps">Listo</button>
+      </div>
+
+      <div id="timedView" class="measure hidden">
+        <strong id="exerciseClock">00:00</strong>
+        <span id="timerHint">Preparado</span>
+        <button class="primary" id="startExerciseTimer">Iniciar</button>
+        <button class="secondary hidden" id="finishTimed">Continuar</button>
+      </div>
+
+      <div class="next-up">
+        <span>SIGUIENTE</span>
+        <strong id="nextExercise">—</strong>
+      </div>
+    </section>
+
+    <section id="rest" class="panel rest hidden">
+      <span class="tag orange">DESCANSO</span>
+      <strong id="restClock">00:00</strong>
+      <p class="muted">Tomate el tiempo que necesites.</p>
+      <button class="secondary" id="skipRest">Saltar descanso</button>
+      <div class="next-up">
+        <span>SIGUIENTE</span>
+        <strong id="restNext">—</strong>
+      </div>
+    </section>
+
+    <section id="finished" class="panel hidden">
+      <span class="eyebrow">ENTRENAMIENTO COMPLETADO</span>
+      <h2>Buen trabajo.</h2>
+      <p class="muted">La sesión quedó guardada en este dispositivo.</p>
+      <button class="primary" id="backHome">Volver</button>
+    </section>
+
+    <section class="panel history">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">REGISTRO</span>
+          <h2>Historial</h2>
+        </div>
+        <button class="text-button" id="toggleHistory">Mostrar</button>
+      </div>
+      <div id="historyList" class="hidden"></div>
+    </section>
+
+    <section id="builder" class="panel builder hidden">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">CONFIGURACIÓN</span>
+          <h2 id="builderHeading">Nueva rutina</h2>
+        </div>
+        <button class="text-button" id="closeBuilder">Cerrar</button>
+      </div>
+
+      <input id="routineName" type="text" placeholder="Nombre de la rutina">
+      <input id="routineDescription" type="text" placeholder="Descripción (opcional)">
+
+      <div class="builder-add">
+        <h3>Agregar ejercicio</h3>
+        <input id="exerciseNameInput" type="text" placeholder="Ej. Sentadillas">
+        <input id="exerciseNoteInput" type="text" placeholder="Nota o indicación (opcional)">
+
+        <div class="choice">
+          <button class="choice-button active" data-mode="reps">Repeticiones</button>
+          <button class="choice-button" data-mode="time">Tiempo</button>
+        </div>
+
+        <div id="repsField">
+          <input id="exerciseReps" type="number" min="1" inputmode="numeric" placeholder="Cantidad de repeticiones">
+        </div>
+        <div id="timeField" class="hidden">
+          <input id="exerciseTime" type="number" min="1" inputmode="numeric" placeholder="Segundos">
+        </div>
+
+        <input id="exerciseRest" type="number" min="0" inputmode="numeric" placeholder="Descanso después (segundos)">
+        <button class="secondary" id="addExercise">Agregar ejercicio</button>
+      </div>
+
+      <div>
+        <h3>Ejercicios</h3>
+        <div id="builderList" class="builder-list"></div>
+      </div>
+
+      <div class="builder-actions">
+        <button class="secondary danger" id="deleteRoutine">Eliminar rutina</button>
+        <button class="primary" id="saveRoutine">Guardar rutina</button>
+      </div>
+    </section>
+
+    <section class="panel data-tools">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">DATOS</span>
+          <h2>Importar / exportar</h2>
+        </div>
+      </div>
+      <textarea id="jsonData" placeholder="Acá podés pegar una rutina en JSON..."></textarea>
+      <div class="two-buttons">
+        <button class="secondary" id="copyJson">Copiar</button>
+        <button class="secondary" id="importJson">Importar</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
